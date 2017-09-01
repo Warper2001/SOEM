@@ -21,5 +21,6 @@
 #include "ethercatsoe.h"
 #include "ethercatconfig.h"
 #include "ethercatprint.h"
+#include "slaveinfo.h"
 
 #endif /* _EC_ETHERCAT_H */

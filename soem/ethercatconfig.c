@@ -22,6 +22,8 @@
 #include "ethercatsoe.h"
 #include "ethercatconfig.h"
 
+#include "slaveinfo.h"
+
 // define if debug printf is needed
 //#define EC_DEBUG
 
@@ -326,6 +328,10 @@ int ecx_config_init(ecx_contextt *context, uint8 usetable)
       ecx_set_slaves_to_default(context);
       for (slave = 1; slave <= *(context->slavecount); slave++)
       {
+
+            // context->slavelist[slave].ec_sii[0].Name = "BOOBIE";
+            // populateSi_map_sii(slave, context);
+
          ADPh = (uint16)(1 - slave);
          context->slavelist[slave].Itype =
             etohs(ecx_APRDw(context->port, ADPh, ECT_REG_PDICTL, EC_TIMEOUTRET3)); /* read interface type of slave */
@@ -590,6 +596,10 @@ int ecx_config_init(ecx_contextt *context, uint8 usetable)
          ecx_eeprom2pdi(context, slave);
          /* request pre_op for slave */
          ecx_FPWRw(context->port, configadr, ECT_REG_ALCTL, htoes(EC_STATE_PRE_OP | EC_STATE_ACK) , EC_TIMEOUTRET3); /* set preop status */
+      }
+      for (slave = 1; slave <= *(context->slavecount); slave++)
+      {
+            populateSi_map_sii(slave, context);
       }
    }
    return wkc;

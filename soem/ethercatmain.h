@@ -48,6 +48,32 @@ struct ec_adapter
    ec_adaptert *next;
 };
 
+/** record SII variables **/
+PACKED_BEGIN
+typedef struct PACKED ec_sii_variable
+{
+    uint16      abs_offset;
+    uint16      abs_bit;
+    uint16      obj_idx;
+    uint8       obj_subidx;
+    uint8       bitlen;
+    char        dataType[EC_MAXNAME + 1];
+    char        name[EC_MAXNAME + 1];
+}ec_sii_variablet;
+PACKED_END
+
+/** record for SII endpoints **/
+PACKED_BEGIN
+typedef struct PACKED ec_sii
+{
+    uint8               SM;
+    uint16              Address;
+    char                Name[EC_MAXNAME + 1];
+    char                RxTx[EC_MAXNAME + 1];
+    ec_sii_variablet    ec_sii_variable[50];
+}   ec_siit;
+PACKED_END
+
 /** record for FMMU */
 PACKED_BEGIN
 typedef struct PACKED ec_fmmu
@@ -103,6 +129,7 @@ PACKED_END
 /** for list of ethercat slaves detected */
 typedef struct ec_slave
 {
+    ec_siit           ec_sii[2];
    /** state of slave */
    uint16           state;
    /** AL status code */

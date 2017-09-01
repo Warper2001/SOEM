@@ -42,6 +42,7 @@ int main()
     // slaveinfo("enp0s8");
 
     printf("Slave test: %s\n", ec_slave[1].name);
+    printf("Slave test: %s\n", ec_slave[1].ec_sii[0].ec_sii_variable[0].name);
 
     // printf("%d\n",ec_slave[0].lp_advertising);
 
