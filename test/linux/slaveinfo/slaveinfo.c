@@ -44,6 +44,24 @@ int main()
     printf("Slave test: %s\n", ec_slave[1].name);
     printf("Slave test: %s\n", ec_slave[1].ec_sii[0].ec_sii_variable[0].name);
 
+    int offset = ec_slave[1].ec_sii[0].ec_sii_variable[0].abs_offset;
+
+    printf("offset: %d\n", offset);
+
+    int dataout[1];
+    dataout[0] = 4;
+
+    int datain[1];
+    datain[0] = 0;
+
+    offset = 5632;
+
+    printf("Output Happened? %d\n", ecx_BWR(&ecx_port,0, offset, 8, dataout, 1000));
+
+    printf("Recieve Happened? %d\n", ecx_BRD(&ecx_port, 0, offset, 8, datain, 1000));
+
+    printf("DATA: %d\n", datain[0]);
+
     // printf("%d\n",ec_slave[0].lp_advertising);
 
     // si_map_sii(1);
