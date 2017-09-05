@@ -600,10 +600,10 @@ int populateSi_map_sii(int slave, ecx_contextt *context)
     outputs_bo = 0;
     inputs_bo = 0;
     /* read the assign RXPDOs */
-    Tsize = populateSi_siiPDO(slave, 1, (int)(ec_slave[slave].outputs - (uint8*)&IOmap), outputs_bo, context );
+    Tsize = populateSi_siiPDO(slave, 1, 0, outputs_bo, context );
     outputs_bo += Tsize;
     /* read the assign TXPDOs */
-    Tsize = populateSi_siiPDO(slave, 0, (int)(ec_slave[slave].inputs - (uint8*)&IOmap), inputs_bo, context );
+    Tsize = populateSi_siiPDO(slave, 0, 0, inputs_bo, context );
     inputs_bo += Tsize;
     /* found some I/O bits ? */
     if ((outputs_bo > 0) || (inputs_bo > 0))
