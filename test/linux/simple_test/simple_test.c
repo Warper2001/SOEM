@@ -93,15 +93,22 @@ void simpletest(char *ifname)
                     {
                         printf("Processdata cycle %4d, WKC %d , O:", i, wkc);
 
+                        // int dataout[1];
+                        // dataout[0] = 4;
+                        // printf("BYTE: %d\n",ec_siigetbyte(1, 6656));
+                        // ecx_BWR(&ecx_port,0, 6439553, 8, dataout, 1000);
+                        // *(ec_slave[1].outputs[0]) = 4;
+
                         for(j = 0 ; j < oloop; j++)
                         {
                             printf(" %2.2x", *(ec_slave[0].outputs + j));
+                            ec_slave[0].outputs[0] = 8; 
                         }
 
                         printf(" I:");
                         for(j = 0 ; j < iloop; j++)
                         {
-                            printf(" %2.2x", *(ec_slave[0].inputs + j));
+                            printf(" %d", *(ec_slave[0].inputs + j));
                         }
                         printf(" T:%"PRId64"\r",ec_DCtime);
                         needlf = TRUE;
